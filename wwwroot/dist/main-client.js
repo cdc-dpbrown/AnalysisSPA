@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "24216e3ee9b7505583a0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2a4ec7717fd321a61def"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -704,7 +704,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(210)(__webpack_require__.s = 210);
+/******/ 	return hotCreateRequire(211)(__webpack_require__.s = 211);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1436,11 +1436,12 @@ var React = __webpack_require__(2);
 var react_router_dom_1 = __webpack_require__(30);
 var Layout_1 = __webpack_require__(186);
 var Home_1 = __webpack_require__(185);
+var SelectDataSource_1 = __webpack_require__(188);
 var FetchData_1 = __webpack_require__(184);
 var Counter_1 = __webpack_require__(183);
 exports.routes = React.createElement(Layout_1.Layout, null,
     React.createElement(react_router_dom_1.Route, { exact: true, path: '/', component: Home_1.default }),
-    React.createElement(react_router_dom_1.Route, { path: '/set-data-source', component: Counter_1.default }),
+    React.createElement(react_router_dom_1.Route, { path: '/set-data-source', component: SelectDataSource_1.default }),
     React.createElement(react_router_dom_1.Route, { path: '/open', component: Counter_1.default }),
     React.createElement(react_router_dom_1.Route, { path: '/save', component: Counter_1.default }),
     React.createElement(react_router_dom_1.Route, { path: '/save-as', component: Counter_1.default }),
@@ -2491,7 +2492,7 @@ exports.reducer = function (state, action) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 Object.defineProperty(exports, "__esModule", { value: true });
-var domain_task_1 = __webpack_require__(203);
+var domain_task_1 = __webpack_require__(204);
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
@@ -2596,14 +2597,14 @@ module.exports = __webpack_require__(181);
 /* WEBPACK VAR INJECTION */(function(process) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(70);
-__webpack_require__(202);
+__webpack_require__(203);
 var React = __webpack_require__(2);
 var ReactDOM = __webpack_require__(61);
 var react_hot_loader_1 = __webpack_require__(174);
 var react_redux_1 = __webpack_require__(29);
 var react_router_redux_1 = __webpack_require__(62);
-var history_1 = __webpack_require__(204);
-var configureStore_1 = __webpack_require__(188);
+var history_1 = __webpack_require__(205);
+var configureStore_1 = __webpack_require__(189);
 var RoutesModule = __webpack_require__(26);
 var routes = RoutesModule.routes;
 // Create browser history to use in the Redux store
@@ -2648,7 +2649,7 @@ var options = {
   name: ''
 };
 if (true) {
-  var querystring = __webpack_require__(206);
+  var querystring = __webpack_require__(207);
   var overrides = querystring.parse(__resourceQuery.slice(1));
   if (overrides.path) options.path = overrides.path;
   if (overrides.timeout) options.timeout = overrides.timeout;
@@ -2768,11 +2769,11 @@ if (typeof window !== 'undefined') {
 }
 
 function createReporter() {
-  var strip = __webpack_require__(199);
+  var strip = __webpack_require__(200);
 
   var overlay;
   if (typeof document !== 'undefined' && options.overlay) {
-    overlay = __webpack_require__(200);
+    overlay = __webpack_require__(201);
   }
 
   var styles = {
@@ -2825,7 +2826,7 @@ function createReporter() {
   };
 }
 
-var processUpdate = __webpack_require__(201);
+var processUpdate = __webpack_require__(202);
 
 var customHandler;
 var subscribeAllHandler;
@@ -3102,7 +3103,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     /* istanbul ignore next */
     if (true) {
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(198)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(199)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -7187,7 +7188,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(2);
 var deepForceUpdate = __webpack_require__(173);
-var Redbox = __webpack_require__(194).default;
+var Redbox = __webpack_require__(195).default;
 var Component = React.Component;
 
 var AppContainer = function (_Component) {
@@ -7370,7 +7371,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var React = __webpack_require__(2);
-var createProxy = __webpack_require__(193).default;
+var createProxy = __webpack_require__(194).default;
 var global = __webpack_require__(71);
 
 var ComponentMap = function () {
@@ -7826,33 +7827,19 @@ var NavMenu = (function (_super) {
                 React.createElement("div", { className: 'navbar-collapse collapse' },
                     React.createElement("ul", { className: 'nav navbar-nav' },
                         React.createElement("li", null,
-                            React.createElement(react_router_dom_1.NavLink, { exact: true, to: '/', activeClassName: 'active' },
-                                React.createElement("span", { className: 'glyphicon glyphicon-edit' }),
-                                " Options")),
+                            React.createElement(react_router_dom_1.NavLink, { exact: true, to: '/', activeClassName: 'active' }, "Options")),
                         React.createElement("li", null,
-                            React.createElement(react_router_dom_1.NavLink, { to: '/set-data-source', activeClassName: 'active' },
-                                React.createElement("span", { className: 'glyphicon glyphicon-lock' }),
-                                " Set Data Source")),
+                            React.createElement(react_router_dom_1.NavLink, { to: '/set-data-source', activeClassName: 'active' }, "Set Data Source")),
                         React.createElement("li", null,
-                            React.createElement(react_router_dom_1.NavLink, { to: '/open', activeClassName: 'active' },
-                                React.createElement("span", { className: 'glyphicon glyphicon-floppy-open' }),
-                                " Open")),
+                            React.createElement(react_router_dom_1.NavLink, { to: '/open', activeClassName: 'active' }, "Open")),
                         React.createElement("li", null,
-                            React.createElement(react_router_dom_1.NavLink, { to: '/save', activeClassName: 'active' },
-                                React.createElement("span", { className: 'glyphicon glyphicon-floppy-save' }),
-                                " Save")),
+                            React.createElement(react_router_dom_1.NavLink, { to: '/save', activeClassName: 'active' }, "Save")),
                         React.createElement("li", null,
-                            React.createElement(react_router_dom_1.NavLink, { to: '/save-as', activeClassName: 'active' },
-                                React.createElement("span", { className: 'glyphicon glyphicon-floppy-save' }),
-                                " Save As")),
+                            React.createElement(react_router_dom_1.NavLink, { to: '/save-as', activeClassName: 'active' }, "Save As")),
                         React.createElement("li", null,
-                            React.createElement(react_router_dom_1.NavLink, { to: '/variables', activeClassName: 'active' },
-                                React.createElement("span", { className: 'glyphicon glyphicon-list' }),
-                                " Variables")),
+                            React.createElement(react_router_dom_1.NavLink, { to: '/variables', activeClassName: 'active' }, "Variables")),
                         React.createElement("li", null,
-                            React.createElement(react_router_dom_1.NavLink, { to: '/fetchdata', activeClassName: 'active' },
-                                React.createElement("span", { className: 'glyphicon glyphicon-chevron-right' }),
-                                " Filter"))))));
+                            React.createElement(react_router_dom_1.NavLink, { to: '/fetchdata', activeClassName: 'active' }, "Filter"))))));
     };
     return NavMenu;
 }(React.Component));
@@ -7868,9 +7855,63 @@ exports.NavMenu = NavMenu;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var redux_1 = __webpack_require__(208);
-var redux_thunk_1 = __webpack_require__(205);
+var React = __webpack_require__(2);
+var SelectDataSource = (function (_super) {
+    __extends(SelectDataSource, _super);
+    function SelectDataSource() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    SelectDataSource.prototype.render = function () {
+        return React.createElement("div", null,
+            React.createElement("h3", null, "Select Data Source"),
+            React.createElement("p", null,
+                React.createElement("br", null)),
+            React.createElement("p", null, "Recent Data Sources"),
+            React.createElement("p", null,
+                React.createElement("br", null)),
+            React.createElement("p", null, "Database Type"),
+            React.createElement("p", null,
+                React.createElement("br", null)),
+            React.createElement("p", null, "Data Source"),
+            React.createElement("p", null, "Browse"),
+            React.createElement("p", null,
+                React.createElement("br", null)),
+            React.createElement("p", null, "Data Source Explorer"),
+            React.createElement("p", null,
+                React.createElement("br", null)),
+            React.createElement("p", null, "OK"),
+            React.createElement("p", null, "Advanced"),
+            React.createElement("p", null, "Cancel"),
+            React.createElement("p", null, "Help"));
+    };
+    return SelectDataSource;
+}(React.Component));
+exports.default = SelectDataSource;
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Code\\Analysis\\ClientApp\\components\\SelectDataSource.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Code\\Analysis\\ClientApp\\components\\SelectDataSource.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+Object.defineProperty(exports, "__esModule", { value: true });
+var redux_1 = __webpack_require__(209);
+var redux_thunk_1 = __webpack_require__(206);
 var react_router_redux_1 = __webpack_require__(62);
 var store_1 = __webpack_require__(27);
 function configureStore(history, initialState) {
@@ -7901,7 +7942,7 @@ function buildRootReducer(allReducers) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8000,7 +8041,7 @@ function bindAutoBindMethodsFromArray(component) {
 }
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8020,15 +8061,15 @@ var _find = __webpack_require__(160);
 
 var _find2 = _interopRequireDefault(_find);
 
-var _createPrototypeProxy = __webpack_require__(191);
+var _createPrototypeProxy = __webpack_require__(192);
 
 var _createPrototypeProxy2 = _interopRequireDefault(_createPrototypeProxy);
 
-var _bindAutoBindMethods = __webpack_require__(189);
+var _bindAutoBindMethods = __webpack_require__(190);
 
 var _bindAutoBindMethods2 = _interopRequireDefault(_bindAutoBindMethods);
 
-var _deleteUnknownAutoBindMethods = __webpack_require__(192);
+var _deleteUnknownAutoBindMethods = __webpack_require__(193);
 
 var _deleteUnknownAutoBindMethods2 = _interopRequireDefault(_deleteUnknownAutoBindMethods);
 
@@ -8296,7 +8337,7 @@ function createClassProxy(Component) {
 }
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8509,7 +8550,7 @@ function createPrototypeProxy() {
 };
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8598,7 +8639,7 @@ function deleteUnknownAutoBindMethods(component) {
 }
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8612,7 +8653,7 @@ var _supportsProtoAssignment = __webpack_require__(59);
 
 var _supportsProtoAssignment2 = _interopRequireDefault(_supportsProtoAssignment);
 
-var _createClassProxy = __webpack_require__(190);
+var _createClassProxy = __webpack_require__(191);
 
 var _createClassProxy2 = _interopRequireDefault(_createClassProxy);
 
@@ -8625,7 +8666,7 @@ if (!(0, _supportsProtoAssignment2.default)()) {
 exports.default = _createClassProxy2.default;
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8642,7 +8683,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _propTypes = __webpack_require__(209);
+var _propTypes = __webpack_require__(210);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -8654,7 +8695,7 @@ var _reactDom = __webpack_require__(61);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _style = __webpack_require__(196);
+var _style = __webpack_require__(197);
 
 var _style2 = _interopRequireDefault(_style);
 
@@ -8662,13 +8703,13 @@ var _errorStackParser = __webpack_require__(69);
 
 var _errorStackParser2 = _interopRequireDefault(_errorStackParser);
 
-var _objectAssign = __webpack_require__(207);
+var _objectAssign = __webpack_require__(208);
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _lib = __webpack_require__(195);
+var _lib = __webpack_require__(196);
 
-var _sourcemappedStacktrace = __webpack_require__(197);
+var _sourcemappedStacktrace = __webpack_require__(198);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9140,7 +9181,7 @@ exports.__ResetDependency__ = _reset__;
 exports.__RewireAPI__ = _RewireAPI__;
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9350,7 +9391,7 @@ exports.__RewireAPI__ = _RewireAPI__;
 exports.default = _RewireAPI__;
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9400,7 +9441,7 @@ var _DefaultExportValue = {
 exports.default = _DefaultExportValue;
 
 /***/ }),
-/* 197 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -11807,7 +11848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
@@ -11923,7 +11964,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11936,7 +11977,7 @@ module.exports = function (str) {
 
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*eslint-env browser*/
@@ -12021,7 +12062,7 @@ function problemType (type) {
 
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -12159,55 +12200,55 @@ module.exports = function(hash, moduleMap, options) {
 
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(138);
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(139);
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(142);
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(147);
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(199);
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(3);
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(77);
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(8);
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(63);

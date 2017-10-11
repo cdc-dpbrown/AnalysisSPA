@@ -18,39 +18,25 @@ export class NavMenu extends React.Component<{}, {}> {
                 <div className='navbar-collapse collapse'>
                     <ul className='nav navbar-nav'>
                         <li>
-                            <NavLink exact to={ '/' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-edit'></span> Options
-                            </NavLink>
+                            <NavLink exact to={ '/' } activeClassName='active'>Options</NavLink>
                         </li>
                         <li>
-                            <NavLink to={ '/set-data-source' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-lock'></span> Set Data Source
-                            </NavLink>
+                            <NavLink to={ '/set-data-source' } activeClassName='active'>Set Data Source</NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/open'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-floppy-open'></span> Open
-                            </NavLink>
+                            <NavLink to={'/open'} activeClassName='active'>Open</NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/save'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-floppy-save'></span> Save
-                            </NavLink>
+                            <NavLink to={'/save'} activeClassName='active'>Save</NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/save-as'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-floppy-save'></span> Save As
-                            </NavLink>
+                            <NavLink to={'/save-as'} activeClassName='active'>Save As</NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/variables'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-list'></span> Variables
-                            </NavLink>
+                            <NavLink to={'/variables'} activeClassName='active'>Variables</NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/fetchdata'} activeClassName='active'>
-                                <span className='glyphicon glyphicon-chevron-right'></span> Filter
-                            </NavLink>
+                            <NavLink to={'/fetchdata'} activeClassName='active'>Filter</NavLink>
                         </li>
                     </ul>
                 </div>
