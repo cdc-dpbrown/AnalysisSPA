@@ -12,24 +12,44 @@ export class NavMenu extends React.Component<{}, {}> {
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
                     </button>
-                    <Link className='navbar-brand' to={ '/' }>Analysis</Link>
+                    <Link className='navbar-brand' to={ '/' }>Epi Info Analysis</Link>
                 </div>
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
                     <ul className='nav navbar-nav'>
                         <li>
                             <NavLink exact to={ '/' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-home'></span> Home
+                                <span className='glyphicon glyphicon-edit'></span> Options
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={ '/counter' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-education'></span> Counter
+                            <NavLink to={ '/set-data-source' } activeClassName='active'>
+                                <span className='glyphicon glyphicon-lock'></span> Set Data Source
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={ '/fetchdata' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-th-list'></span> Fetch data
+                            <NavLink to={'/open'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-floppy-open'></span> Open
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/save'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-floppy-save'></span> Save
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/save-as'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-floppy-save'></span> Save As
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/variables'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-list'></span> Variables
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/fetchdata'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-chevron-right'></span> Filter
                             </NavLink>
                         </li>
                     </ul>
