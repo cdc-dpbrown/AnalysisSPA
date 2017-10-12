@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2a4ec7717fd321a61def"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e75a2956fa7b343d2b43"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -7822,6 +7822,7 @@ var NavMenu = (function (_super) {
                         React.createElement("span", { className: 'icon-bar' }),
                         React.createElement("span", { className: 'icon-bar' }),
                         React.createElement("span", { className: 'icon-bar' })),
+                    React.createElement("img", { src: "/Content/Images/ei.png" }),
                     React.createElement(react_router_dom_1.Link, { className: 'navbar-brand', to: '/' }, "Epi Info Analysis")),
                 React.createElement("div", { className: 'clearfix' }),
                 React.createElement("div", { className: 'navbar-collapse collapse' },
