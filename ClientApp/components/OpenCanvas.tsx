@@ -6,16 +6,20 @@ import * as CanvasStore from '../store/Canvas';
 import * as WeatherForecasts from '../store/WeatherForecasts';
 
 type CanvasProps =
-    CanvasStore.CounterState
-    & typeof CounterStore.actionCreators
+    CanvasStore.CanvasState
+    & typeof CanvasStore.actionCreators
     & RouteComponentProps<{}>;
 
-class OpenCanvas extends React.Component<CounterProps, {}> {
+class OpenCanvas extends React.Component<CanvasProps, {}> {
     public render() {
         return <div>
-            <h1>Counter</h1>
+            <h1>Open Recent</h1>
 
-            <p>This is a simple example of a React component.</p>
+            <p>...list of resent files...</p>
+
+            <h1>Browse</h1>
+
+            <p>...browse inputs...</p>
 
             <p>Current count: <strong>{this.props.count}</strong></p>
 
@@ -26,7 +30,7 @@ class OpenCanvas extends React.Component<CounterProps, {}> {
 
 // Wire up the React component to the Redux store
 export default connect(
-    (state: ApplicationState) => state.counter, // Selects which state properties are merged into the component's props
-    CounterStore.actionCreators                 // Selects which action creators are merged into the component's props
-)(Counter) as typeof Counter;
+    (state: ApplicationState) => state.canvas, // Selects which state properties are merged into the component's props
+    CanvasStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(OpenCanvas) as typeof OpenCanvas;
 

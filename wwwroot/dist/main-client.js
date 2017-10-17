@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3e3c1a5687505038d2dd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0a918bfef5b5d36accaf"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -7883,26 +7883,7 @@ var SelectDataSource = (function (_super) {
     }
     SelectDataSource.prototype.render = function () {
         return React.createElement("div", null,
-            React.createElement("h3", null, "Select Data Source"),
-            React.createElement("p", null,
-                React.createElement("br", null)),
-            React.createElement("p", null, "Recent Data Sources"),
-            React.createElement("p", null,
-                React.createElement("br", null)),
-            React.createElement("p", null, "Database Type"),
-            React.createElement("p", null,
-                React.createElement("br", null)),
-            React.createElement("p", null, "Data Source"),
-            React.createElement("p", null, "Browse"),
-            React.createElement("p", null,
-                React.createElement("br", null)),
-            React.createElement("p", null, "Data Source Explorer"),
-            React.createElement("p", null,
-                React.createElement("br", null)),
-            React.createElement("p", null, "OK"),
-            React.createElement("p", null, "Advanced"),
-            React.createElement("p", null, "Cancel"),
-            React.createElement("p", null, "Help"));
+            React.createElement("h3", null, "Select Data Source"));
     };
     return SelectDataSource;
 }(React.Component));
