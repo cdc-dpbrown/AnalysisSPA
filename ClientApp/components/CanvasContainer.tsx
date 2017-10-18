@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import Canvas from "../components/Canvas";
 
-export default class SelectDataSource extends React.Component<RouteComponentProps<{}>, {}> {
+export default class CanvasContainer extends React.Component<RouteComponentProps<{}>, {}> {
+
     public render() {
-        return <div>
-            <h3>[ canvas ]</h3>
-        </div>;
+        return <Canvas/>;
     }
 }
+

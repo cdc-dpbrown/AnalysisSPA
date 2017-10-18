@@ -4,7 +4,7 @@ import { Action, Reducer } from 'redux';
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface SettingsState {
-    json: string;
+    //note: string;
 }
 
 // -----------------
@@ -34,9 +34,9 @@ export const actionCreators = {
 export const reducer: Reducer<SettingsState> = (state: SettingsState, action: KnownAction) => {
     switch (action.type) {
         case 'INCREMENT_COUNT':
-            return { count: state.count + 1 };
+            return { };
         case 'DECREMENT_COUNT':
-            return { count: state.count - 1 };
+            return { };
         default:
             // The following line guarantees that every action in the KnownAction union has been covered by a case above
             const exhaustiveCheck: never = action;

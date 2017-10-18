@@ -21,9 +21,9 @@ class OpenCanvas extends React.Component<CanvasProps, {}> {
 
             <p>...browse inputs...</p>
 
-            <p>Current count: <strong>{this.props.count}</strong></p>
+            <p>Current count: <strong>{/*this.props.count*/}</strong></p>
 
-            <button onClick={() => { this.props.increment() }}>Increment</button>
+            <button onClick={() => {/* this.props.increment() */}}>Increment</button>
         </div>;
     }
 }
