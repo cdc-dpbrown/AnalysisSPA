@@ -18,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="ClientApp\definitions\chart.json" />
+    <Content Include="ClientApp\definitions\canvas.json" />
+    <Content Include="ClientApp\definitions\rates.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
   </ItemGroup>
 

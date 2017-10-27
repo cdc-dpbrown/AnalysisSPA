@@ -5,7 +5,7 @@ import { AppThunkAction } from './';
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface ApplicationState {
+export interface UserApplicationState {
     isLoading: boolean;
     path: string;
     recents: Recent[];

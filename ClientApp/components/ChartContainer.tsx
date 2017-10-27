@@ -5,6 +5,7 @@ import Chart from "../components/Chart";
 export default class ChartContainer extends React.Component<RouteComponentProps<{}>, {}> {
 
     public render() {
-        return <Chart  />;
+        return <Chart/>;
     }
 }
+

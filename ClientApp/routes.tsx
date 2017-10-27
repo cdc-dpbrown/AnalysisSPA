@@ -7,6 +7,7 @@ import FetchData from './components/FetchData';
 import Counter from './components/Counter';
 import CanvasContainer from './components/CanvasContainer';
 import Canvas from './components/Canvas';
+import ChartContainer from './components/ChartContainer';
 import Chart from './components/Chart';
 import SettingsDialog from './components/SettingsDialog';
 import OpenCanvas from './components/OpenCanvas';
