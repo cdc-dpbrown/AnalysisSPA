@@ -56,7 +56,7 @@ export const reducer: Reducer<CanvasState> = (state: CanvasState, action: Canvas
             };
 
         case 'RECEIVE_CANVAS':
-            var ids: string[] = [];
+            let ids: string[] = [];
 
             action.json.canvas.charts.forEach((i) => {
                 ids.push(i.id as string);

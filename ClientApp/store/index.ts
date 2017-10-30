@@ -1,4 +1,5 @@
 import * as CanvasStore from './Canvas';
+import * as ChartStore from './Chart';
 import * as CounterStore from './Counter';
 import * as WeatherForecastsStore from './WeatherForecasts';
 import * as SettingsStore from './Counter';
@@ -6,6 +7,7 @@ import * as SettingsStore from './Counter';
 // The top-level state object
 export interface ApplicationState {
     canvas: CanvasStore.CanvasState,
+    chart: ChartStore.ChartState,
     counter: CounterStore.CounterState,
     settings: SettingsStore.CounterState,
     weatherForecasts: WeatherForecastsStore.WeatherForecastsState
@@ -16,6 +18,7 @@ export interface ApplicationState {
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
     canvas: CanvasStore.reducer,
+    chart: ChartStore.reducer,
     counter: CounterStore.reducer,
     settings: SettingsStore.reducer,
     weatherForecasts: WeatherForecastsStore.reducer

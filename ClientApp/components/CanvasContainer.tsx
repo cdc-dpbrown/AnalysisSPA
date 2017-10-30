@@ -19,13 +19,15 @@ class CanvasContainer extends React.Component<CanvasProps, {}> {
     }
 
     public render() {
-        return <Canvas id={this.props.id} isLoading={this.props.isLoading} json={this.props.json} charts={this.props.charts} />;
-
-        //return <div>
-        //    <h1>{this.props.id} </h1>
-        //    <h1>{JSON.stringify(this.props.json)} </h1>
-        //    <h1>{this.props.isLoading} </h1>
-        //</div>;
+        return <div>
+            <Canvas id={this.props.id} isLoading={this.props.isLoading} json={this.props.json} charts={this.props.charts} />
+            <div>
+                <br/>
+                <h1>{this.props.id} </h1>
+                <h1>{JSON.stringify(this.props.json)} </h1>
+                <h1>{this.props.isLoading} </h1>
+            </div>
+        </div>;
     }
 }
 
