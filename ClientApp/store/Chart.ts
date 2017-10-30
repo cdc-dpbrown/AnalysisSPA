@@ -35,7 +35,7 @@ export const actionCreators = {
         // Only load data if it's something we don't already have (and are not already loading)
         if (true) {
             let fetchTask = fetch(`/api/SampleData/Cards?startDateIndex=${ startDateIndex }`)
-                .then(response => response.json() as Promise<Card[]>)
+                .then(response => response.json() as Promise<any>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_CANVAS_CARDS', startDateIndex: startDateIndex, forecasts: data });
                 });
