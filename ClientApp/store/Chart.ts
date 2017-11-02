@@ -3,53 +3,64 @@ import { Action, Reducer, ActionCreator } from 'redux';
 import { AppThunkAction } from './';
 
 export interface ChartState {
-    id: string;
-    isLoading: boolean;
-    isInEdit: boolean;
-    json: any;
+    chart_id: string;
+    chart_type: string;
+    chart_inEdit: string;
+    chart_loading: boolean;
 }
 
 interface RequestChartAction {
     type: 'REQUEST_CHART',
-    id: string;
+    chart_id: string;
 }
 
 interface ReceiveChartAction {
     type: 'RECEIVE_CHART';
-    id: string;
+    chart_id: string;
     json: any;
 }
 
-type ChartAction = RequestChartAction | ReceiveChartAction;
+interface GetChartAction {
+    type: 'GET_CHART';
+    chart_id: string;
+    chart_type: string;
+    chart_inEdit: string;
+    chart_loading: boolean;
+}
+
+type ChartAction = RequestChartAction | ReceiveChartAction | GetChartAction;
 
 export const actionCreators = {
-    requestCards: (id: string): AppThunkAction<ChartAction> => (dispatch, getState) => {
-        if (id !== getState().chart.id) {
+    requestChart: (id: string): AppThunkAction<ChartAction> => (dispatch, getState) => {
+        if (id !== getState().chart.chart_id) {
             let fetchTask = fetch(`/api/SettingsData/Chart?id=${ id }`)
                 .then(response => response.json() as Promise<any>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_CHART', id: id, json: data });
+                    dispatch({ type: 'RECEIVE_CHART', chart_id: id, json: data });
                 });
-
             addTask(fetchTask); 
-            dispatch({ type: 'REQUEST_CHART', id: id });
+            dispatch({ type: 'REQUEST_CHART', chart_id: id });
+        }
+    },
+    getChart: (id: string): AppThunkAction<ChartAction> => (dispatch, getState) => {
+        if (id !== getState().chart.chart_id) {
         }
     }
 };
 
 const unloadedState: ChartState = {
-    id: null,
-    isLoading: false,
-    isInEdit: false,
-    json: null
+    chart_id: null,
+    chart_type: null,
+    chart_inEdit: null,
+    chart_loading: false,
+
 };
 
 export const reducer: Reducer<ChartState> = (state: ChartState, action: ChartAction) => {
     switch (action.type) {
         case 'REQUEST_CHART':
             return {
-                id: action.id,
-                json: state.json,
+                id: action.chart_id,
                 isLoading: true
             };
         case 'RECEIVE_CHART':

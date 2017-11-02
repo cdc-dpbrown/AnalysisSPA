@@ -4,24 +4,24 @@
     "inEdit": "false",
     "charts": [
       {
-        "type": "rate",
-        "id": "d8e43cd1-e7a6-4103-8452-585b06e4ee9a",
-        "inEdit": "false"
+        "chart_id": "d8e43cd1-e7a6-4103-8452-585b06e4ee9a",
+        "chart_type": "rate",
+        "chart_inEdit": "false"
       },
       {
-        "type": "rate",
-        "id": "pac83cf6-5aca-45bb-a76f-df86f562e081",
-        "inEdit": "true"
+        "chart_id": "pac83cf6-5aca-45bb-a76f-df86f562e081",
+        "chart_type": "rate",
+        "chart_inEdit": "true"
       },
       {
-        "type": "freq",
-        "id": "bd0e0b6d-3c96-4f99-8771-5e4826e94928",
-        "inEdit": "false;"
+        "chart_id": "bd0e0b6d-3c96-4f99-8771-5e4826e94928",
+        "chart_type": "freq",
+        "chart_inEdit": "false;"
       },
       {
-        "type": "nxm",
-        "id": "7db66664-67fd-433e-affb-fd3b50c56810",
-        "inEdit": "false"
+        "chart_id": "7db66664-67fd-433e-affb-fd3b50c56810",
+        "chart_type": "nxm",
+        "chart_inEdit": "false"
       }
     ]
   }

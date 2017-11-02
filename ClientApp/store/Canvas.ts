@@ -1,12 +1,14 @@
 import { fetch, addTask } from 'domain-task';
 import { Action, Reducer, ActionCreator } from 'redux';
 import { AppThunkAction } from './';
+import { ChartState } from 'ClientApp/store/Chart';
 
 export interface CanvasState {
     id: string;
     isLoading: boolean;
     json: any;
-    charts: string[];
+    chartIds: string[];
+    charts: ChartState[];
 }
 
 interface RequestCanvasAction {
@@ -42,6 +44,7 @@ const unloadedState: CanvasState = {
     id: null,
     isLoading: false,
     json: null,
+    chartIds: null,
     charts: null
 };
 
@@ -57,16 +60,22 @@ export const reducer: Reducer<CanvasState> = (state: CanvasState, action: Canvas
 
         case 'RECEIVE_CANVAS':
             let ids: string[] = [];
+            let chartStates: ChartState[] = []; 
 
-            action.json.canvas.charts.forEach((i) => {
-                ids.push(i.id as string);
+            action.json.canvas.charts.forEach((c) => {
+                ids.push(c.chart_id as string);
+            })
+
+            action.json.canvas.charts.forEach((c) => {
+                chartStates.push(c);
             })
 
             return {
                 id: action.json.canvas.id,
                 json: action.json,
                 isLoading: false,
-                charts: ids
+                chartIds: ids,
+                charts: chartStates
             };
    
         default:

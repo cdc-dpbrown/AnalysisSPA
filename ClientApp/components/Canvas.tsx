@@ -15,11 +15,20 @@ export default class Canvas extends React.Component<CanvasProps, {}> {
     }
 
     private renderCharts() {
-        if (this.props.charts) {
+        if (this.props.chartIds) {
             return <div>
-                {this.props.charts.map(id =>
+                {this.props.chartIds.map(id =>
                     <div className='col-sm-3 cardstock'>{id}</div>
                 )}
+                {this.props.charts.map(chartContainer =>
+                    <ChartContainer
+                        chart_id={chartContainer.chart_id}
+                        chart_type={chartContainer.chart_type}
+                        chart_inEdit={chartContainer.chart_inEdit}
+                        chart_loading={chartContainer.chart_loading}
+                    />
+                )}
+
             </div>;
         }
     }

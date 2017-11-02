@@ -5,15 +5,26 @@ import { ApplicationState } from '../store';
 import * as ChartState from '../store/Chart';
 import Chart from "../components/Chart";
 
-type ChartProps = ChartState.ChartState & typeof ChartState.actionCreators & RouteComponentProps<{ id: string }>; 
+type ChartProps = ChartState.ChartState;
 
 class ChartContainer extends React.Component<ChartProps, {}> {
 
     public render() {
         return <div>
-            <h1>{this.props.id} </h1>
+            {this.renderChart()}
         </div>;
-        //return <Chart/>;
+    }
+
+    private renderChart() {
+        if (this.props.chart_id) {
+            return <div>
+                <h1>{this.props.chart_id} </h1>
+                <h1>{this.props.chart_type} </h1>
+                <h1> dpbrown </h1>
+                <h1>{this.props.chart_id} </h1>
+
+            </div>;
+        };
     }
 }
 
