@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b9e2372438dea7f9dee6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2058b86761a3ca5ea50d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2532,7 +2532,9 @@ exports.reducer = function (state, action) {
             return {
                 id: action.id,
                 json: state.json,
-                isLoading: true
+                isLoading: true,
+                chartIds: state.chartIds,
+                charts: state.charts
             };
         case 'RECEIVE_CANVAS':
             var ids_1 = [];
@@ -2574,7 +2576,7 @@ exports.actionCreators = {
             var fetchTask = domain_task_1.fetch("/api/SettingsData/Chart?id=" + id)
                 .then(function (response) { return response.json(); })
                 .then(function (data) {
-                dispatch({ type: 'RECEIVE_CHART', chart_id: id, json: data });
+                dispatch({ type: 'RECEIVE_CHART', chart_id: id, chart_json: data });
             });
             domain_task_1.addTask(fetchTask);
             dispatch({ type: 'REQUEST_CHART', chart_id: id });
@@ -2595,14 +2597,25 @@ exports.reducer = function (state, action) {
     switch (action.type) {
         case 'REQUEST_CHART':
             return {
-                id: action.chart_id,
-                isLoading: true
+                chart_id: state.chart_id,
+                chart_type: state.chart_type,
+                chart_inEdit: state.chart_inEdit,
+                chart_loading: true
             };
         case 'RECEIVE_CHART':
             return {
-                id: action.json.canvas.id,
-                json: action.json,
-                isLoading: false,
+                chart_id: action.chart_id,
+                chart_json: action.chart_json,
+                chart_type: null,
+                chart_inEdit: null,
+                chart_loading: false
+            };
+        case 'GET_CHART':
+            return {
+                chart_id: action.chart_id,
+                chart_type: action.chart_type,
+                chart_inEdit: action.chart_inEdit,
+                chart_loading: false
             };
         default:
             var exhaustiveCheck = action;
@@ -7721,20 +7734,49 @@ var React = __webpack_require__(2);
 var ChartContainer_1 = __webpack_require__(188);
 var Canvas = (function (_super) {
     __extends(Canvas, _super);
-    function Canvas() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    //constructor(CanvasProps) {
+    //    super(CanvasProps);
+    //    this.state = {
+    //        id: CanvasProps.chart_id,
+    //        isLoading: CanvasProps.chart_type,
+    //        json: CanvasProps.chart_inEdit,
+    //        chartIds: CanvasProps.chart_loading,
+    //        charts: CanvasProps....
+    //    };
+    //}
+    function Canvas(CanvasProps) {
+        var _this = _super.call(this, CanvasProps) || this;
+        console.log('constructor');
+        console.log(_this.props);
+        return _this;
     }
     Canvas.prototype.render = function () {
-        return React.createElement("div", null, this.renderCharts());
+        console.log('render()_canvas');
+        console.log(this.props);
+        return React.createElement("div", null,
+            React.createElement("span", null, "dpb"),
+            this.renderCanvas());
     };
-    Canvas.prototype.renderCharts = function () {
+    //chart_id: string;
+    //chart_type: string;
+    //chart_inEdit: string;
+    //chart_loading: boolean;
+    //key = { chartContainer.chart_id }
+    //chart_id = { chartContainer.chart_id }
+    //chart_type = { chartContainer.chart_type }
+    //chart_inEdit = { chartContainer.chart_inEdit }
+    //chart_loading = { chartContainer.chart_loading }
+    Canvas.prototype.renderCanvas = function () {
+        console.log('renderCanvas()');
+        console.log(this.props);
         if (this.props.chartIds) {
             return React.createElement("div", null,
                 this.props.chartIds.map(function (id) {
-                    return React.createElement("div", { className: 'col-sm-3 cardstock' }, id);
+                    return React.createElement("div", { key: id, className: 'col-sm-3 cardstock' }, id);
                 }),
+                console.log('has chartIds'),
                 this.props.charts.map(function (chartContainer) {
-                    return React.createElement(ChartContainer_1.default, { chart_id: chartContainer.chart_id, chart_type: chartContainer.chart_type, chart_inEdit: chartContainer.chart_inEdit, chart_loading: chartContainer.chart_loading });
+                    return React.createElement(ChartContainer_1.default, { key: chartContainer.chart_id, chart_id: chartContainer.chart_id, chart_type: chartContainer.chart_type, chart_inEdit: chartContainer.chart_inEdit, chart_loading: chartContainer.chart_loading });
                 }));
         }
     };
@@ -7786,8 +7828,7 @@ var CanvasContainer = (function (_super) {
                 React.createElement("br", null),
                 React.createElement("h1", null, this.props.id),
                 React.createElement("h1", null, JSON.stringify(this.props.json)),
-                React.createElement("h1", null, this.props.isLoading),
-                React.createElement("h1", null, this.props.charts))));
+                React.createElement("h1", null, this.props.isLoading ? React.createElement("span", null, "Loading...") : React.createElement("span", null, "Not loading...")))));
     };
     return CanvasContainer;
 }(React.Component));
@@ -7822,11 +7863,31 @@ var ChartContainer = (function (_super) {
     function ChartContainer() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    //constructor(ChartProps) {
+    //    super(ChartProps);
+    //    this.state = {
+    //        chart_id: ChartProps.chart_id,
+    //        chart_type: ChartProps.chart_type,
+    //        chart_inEdit: ChartProps.chart_inEdit,
+    //        chart_loading: ChartProps.chart_loading,
+    //    };
+    //}
+    //componentWillReceiveProps(nextProps: ChartProps) {
+    //    this.props.getChart(nextProps.chart_id);
+    //}
     ChartContainer.prototype.render = function () {
+        console.log('render()_chart');
+        console.log(this.props);
         return React.createElement("div", null, this.renderChart());
     };
     ChartContainer.prototype.renderChart = function () {
         if (this.props.chart_id) {
+            {
+                console.log('renderChart()');
+            }
+            {
+                console.log('renderChart()');
+            }
             return React.createElement("div", null,
                 React.createElement("h1", null,
                     this.props.chart_id,

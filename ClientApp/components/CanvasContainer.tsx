@@ -20,13 +20,12 @@ class CanvasContainer extends React.Component<CanvasProps, {}> {
 
     public render() {
         return (<div>
-            <Canvas id={this.props.id} isLoading={this.props.isLoading} json={this.props.json} chartIds={this.props.chartIds} charts={this.props.charts} />
-            <div>
+                <Canvas id={this.props.id} isLoading={this.props.isLoading} json={this.props.json} chartIds={this.props.chartIds} charts={this.props.charts} />
+                <div>
                 <br/>
                 <h1>{this.props.id}</h1>
                 <h1>{JSON.stringify(this.props.json)}</h1>
-                <h1>{this.props.isLoading}</h1>
-                <h1>{this.props.charts}</h1>
+                <h1>{this.props.isLoading ? React.createElement("span", null, "Loading...") : React.createElement("span", null, "Not loading...")}</h1>
             </div>
         </div>);
     }

@@ -17,7 +17,7 @@ interface RequestChartAction {
 interface ReceiveChartAction {
     type: 'RECEIVE_CHART';
     chart_id: string;
-    json: any;
+    chart_json: any;
 }
 
 interface GetChartAction {
@@ -36,7 +36,7 @@ export const actionCreators = {
             let fetchTask = fetch(`/api/SettingsData/Chart?id=${ id }`)
                 .then(response => response.json() as Promise<any>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_CHART', chart_id: id, json: data });
+                    dispatch({ type: 'RECEIVE_CHART', chart_id: id, chart_json: data });
                 });
             addTask(fetchTask); 
             dispatch({ type: 'REQUEST_CHART', chart_id: id });
@@ -60,14 +60,25 @@ export const reducer: Reducer<ChartState> = (state: ChartState, action: ChartAct
     switch (action.type) {
         case 'REQUEST_CHART':
             return {
-                id: action.chart_id,
-                isLoading: true
+                chart_id: state.chart_id,
+                chart_type: state.chart_type,
+                chart_inEdit: state.chart_inEdit,
+                chart_loading: true
             };
         case 'RECEIVE_CHART':
             return {
-                id: action.json.canvas.id,
-                json: action.json,
-                isLoading: false,
+                chart_id: action.chart_id,
+                chart_json: action.chart_json,
+                chart_type: null,
+                chart_inEdit: null,
+                chart_loading: false
+            };
+        case 'GET_CHART':
+            return {
+                chart_id: action.chart_id,
+                chart_type: action.chart_type,
+                chart_inEdit: action.chart_inEdit,
+                chart_loading: false
             };
         default:
             const exhaustiveCheck: never = action;

@@ -4,24 +4,62 @@ import * as CanvasState from '../store/Canvas';
 import ChartContainer from "../components/ChartContainer";
 import Chart from "../components/Chart";
 
-type CanvasProps = CanvasState.CanvasState ; 
+type CanvasProps = CanvasState.CanvasState; 
 
 export default class Canvas extends React.Component<CanvasProps, {}> {
 
+    //constructor(CanvasProps) {
+    //    super(CanvasProps);
+    //    this.state = {
+    //        id: CanvasProps.chart_id,
+    //        isLoading: CanvasProps.chart_type,
+    //        json: CanvasProps.chart_inEdit,
+    //        chartIds: CanvasProps.chart_loading,
+    //        charts: CanvasProps....
+    //    };
+    //}
+
+    constructor(CanvasProps) {
+        super(CanvasProps);
+        console.log('constructor');
+        console.log(this.props);
+    }
+
     public render() {
-        return <div>
-            { this.renderCharts() }
+        console.log('render()_canvas');
+        console.log(this.props);
+        return <div><span>dpb</span>
+            { this.renderCanvas() }
         </div>;
     }
 
-    private renderCharts() {
+    //chart_id: string;
+    //chart_type: string;
+    //chart_inEdit: string;
+    //chart_loading: boolean;
+
+
+    //key = { chartContainer.chart_id }
+    //chart_id = { chartContainer.chart_id }
+    //chart_type = { chartContainer.chart_type }
+    //chart_inEdit = { chartContainer.chart_inEdit }
+    //chart_loading = { chartContainer.chart_loading }
+
+
+    private renderCanvas() {
+        console.log('renderCanvas()');
+        console.log(this.props);
         if (this.props.chartIds) {
             return <div>
                 {this.props.chartIds.map(id =>
-                    <div className='col-sm-3 cardstock'>{id}</div>
+                    <div key={id} className='col-sm-3 cardstock'>{id}</div>
                 )}
+
+                {console.log('has chartIds')}
+
                 {this.props.charts.map(chartContainer =>
                     <ChartContainer
+                        key={chartContainer.chart_id}
                         chart_id={chartContainer.chart_id}
                         chart_type={chartContainer.chart_type}
                         chart_inEdit={chartContainer.chart_inEdit}

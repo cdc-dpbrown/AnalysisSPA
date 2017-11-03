@@ -55,7 +55,9 @@ export const reducer: Reducer<CanvasState> = (state: CanvasState, action: Canvas
             return {
                 id: action.id,
                 json: state.json,
-                isLoading: true
+                isLoading: true,
+                chartIds: state.chartIds,
+                charts: state.charts
             };
 
         case 'RECEIVE_CANVAS':
