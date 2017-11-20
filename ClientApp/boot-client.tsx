@@ -35,8 +35,11 @@ renderApp();
 
 // Allow Hot Module Replacement
 if (module.hot) {
+    console.log("HMR(true)")
     module.hot.accept('./routes', () => {
         routes = require<typeof RoutesModule>('./routes').routes;
         renderApp();
     });
+} else {
+    console.log("HMR(false)")
 }

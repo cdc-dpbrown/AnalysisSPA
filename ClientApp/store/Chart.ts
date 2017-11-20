@@ -31,21 +31,21 @@ interface GetChartAction {
 type ChartAction = RequestChartAction | ReceiveChartAction | GetChartAction;
 
 export const actionCreators = {
-    requestChart: (id: string): AppThunkAction<ChartAction> => (dispatch, getState) => {
-        if (id !== getState().chart.chart_id) {
-            let fetchTask = fetch(`/api/SettingsData/Chart?id=${ id }`)
-                .then(response => response.json() as Promise<any>)
-                .then(data => {
-                    dispatch({ type: 'RECEIVE_CHART', chart_id: id, chart_json: data });
-                });
-            addTask(fetchTask); 
-            dispatch({ type: 'REQUEST_CHART', chart_id: id });
-        }
-    },
-    getChart: (id: string): AppThunkAction<ChartAction> => (dispatch, getState) => {
-        if (id !== getState().chart.chart_id) {
-        }
-    }
+    //requestChart: (id: string): AppThunkAction<ChartAction> => (dispatch, getState) => {
+    //    if (id !== getState().chart.chart_id) {
+    //        let fetchTask = fetch(`/api/SettingsData/Chart?id=${ id }`)
+    //            .then(response => response.json() as Promise<any>)
+    //            .then(data => {
+    //                dispatch({ type: 'RECEIVE_CHART', chart_id: id, chart_json: data });
+    //            });
+    //        addTask(fetchTask); 
+    //        dispatch({ type: 'REQUEST_CHART', chart_id: id });
+    //    }
+    //},
+    //getChart: (id: string): AppThunkAction<ChartAction> => (dispatch, getState) => {
+    //    if (id !== getState().chart.chart_id) {
+    //    }
+    //}
 };
 
 const unloadedState: ChartState = {

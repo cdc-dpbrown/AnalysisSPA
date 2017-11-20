@@ -11,7 +11,7 @@ namespace Analysis.Controllers
     public class SettingsDataController : Controller
     {
         [HttpGet("[action]")]
-        public string Canvas(string id)
+        public string Dashboard(string id)
         {
             using (StreamReader reader = new StreamReader("wwwroot/definitions/canvas.json"))
             {

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2058b86761a3ca5ea50d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6df53a9c6891b927bdb4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -1444,12 +1444,12 @@ var Layout_1 = __webpack_require__(192);
 var Home_1 = __webpack_require__(191);
 var SelectDataSource_1 = __webpack_require__(194);
 var FetchData_1 = __webpack_require__(190);
-var Counter_1 = __webpack_require__(189);
-var CanvasContainer_1 = __webpack_require__(187);
+var Counter_1 = __webpack_require__(187);
+var DashboardContainer_1 = __webpack_require__(189);
 exports.routes = React.createElement(Layout_1.Layout, null,
     React.createElement(react_router_dom_1.Route, { exact: true, path: '/', component: Home_1.default }),
     React.createElement(react_router_dom_1.Route, { path: '/set-data-source', component: SelectDataSource_1.default }),
-    React.createElement(react_router_dom_1.Route, { path: '/open', component: CanvasContainer_1.default }),
+    React.createElement(react_router_dom_1.Route, { path: '/open', component: DashboardContainer_1.default }),
     React.createElement(react_router_dom_1.Route, { path: '/save', component: Counter_1.default }),
     React.createElement(react_router_dom_1.Route, { path: '/save-as', component: Counter_1.default }),
     React.createElement(react_router_dom_1.Route, { path: '/variables', component: Counter_1.default }),
@@ -1503,8 +1503,8 @@ exports.reducer = function (state, action) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 Object.defineProperty(exports, "__esModule", { value: true });
-var CanvasStore = __webpack_require__(59);
-var ChartStore = __webpack_require__(60);
+var DashboardStore = __webpack_require__(60);
+var ChartStore = __webpack_require__(59);
 var CounterStore = __webpack_require__(28);
 var WeatherForecastsStore = __webpack_require__(61);
 var SettingsStore = __webpack_require__(28);
@@ -1512,7 +1512,7 @@ var SettingsStore = __webpack_require__(28);
 // the reducer with the matching name. It's important that the names match exactly, and that the reducer
 // acts on the corresponding ApplicationState property type.
 exports.reducers = {
-    canvas: CanvasStore.reducer,
+    dashboard: DashboardStore.reducer,
     chart: ChartStore.reducer,
     counter: CounterStore.reducer,
     settings: SettingsStore.reducer,
@@ -2507,70 +2507,6 @@ if (!module.hot || process.env.NODE_ENV === 'production') {
 Object.defineProperty(exports, "__esModule", { value: true });
 var domain_task_1 = __webpack_require__(31);
 exports.actionCreators = {
-    requestCanvas: function (id) { return function (dispatch, getState) {
-        if (id !== getState().canvas.id) {
-            var fetchTask = domain_task_1.fetch("/api/SettingsData/Canvas?id=" + id)
-                .then(function (response) { return response.json(); })
-                .then(function (data) {
-                dispatch({ type: 'RECEIVE_CANVAS', id: id, json: data, charts: null });
-            });
-            domain_task_1.addTask(fetchTask);
-            dispatch({ type: 'REQUEST_CANVAS', id: id });
-        }
-    }; }
-};
-var unloadedState = {
-    id: null,
-    isLoading: false,
-    json: null,
-    chartIds: null,
-    charts: null
-};
-exports.reducer = function (state, action) {
-    switch (action.type) {
-        case 'REQUEST_CANVAS':
-            return {
-                id: action.id,
-                json: state.json,
-                isLoading: true,
-                chartIds: state.chartIds,
-                charts: state.charts
-            };
-        case 'RECEIVE_CANVAS':
-            var ids_1 = [];
-            var chartStates_1 = [];
-            action.json.canvas.charts.forEach(function (c) {
-                ids_1.push(c.chart_id);
-            });
-            action.json.canvas.charts.forEach(function (c) {
-                chartStates_1.push(c);
-            });
-            return {
-                id: action.json.canvas.id,
-                json: action.json,
-                isLoading: false,
-                chartIds: ids_1,
-                charts: chartStates_1
-            };
-        default:
-            var exhaustiveCheck = action;
-    }
-    return state || unloadedState;
-};
-
-
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Code\\Analysis\\ClientApp\\store\\Canvas.ts"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Code\\Analysis\\ClientApp\\store\\Canvas.ts"); } } })();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-Object.defineProperty(exports, "__esModule", { value: true });
-var domain_task_1 = __webpack_require__(31);
-exports.actionCreators = {
     requestChart: function (id) { return function (dispatch, getState) {
         if (id !== getState().chart.chart_id) {
             var fetchTask = domain_task_1.fetch("/api/SettingsData/Chart?id=" + id)
@@ -2625,6 +2561,70 @@ exports.reducer = function (state, action) {
 
 
  ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Code\\Analysis\\ClientApp\\store\\Chart.ts"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Code\\Analysis\\ClientApp\\store\\Chart.ts"); } } })();
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+Object.defineProperty(exports, "__esModule", { value: true });
+var domain_task_1 = __webpack_require__(31);
+exports.actionCreators = {
+    requestDashboard: function (id) { return function (dispatch, getState) {
+        if (id !== getState().dashboard.id) {
+            var fetchTask = domain_task_1.fetch("/api/SettingsData/Dashboard?id=" + id)
+                .then(function (response) { return response.json(); })
+                .then(function (data) {
+                dispatch({ type: 'RECEIVE_DASHBOARD', id: id, json: data, charts: null });
+            });
+            domain_task_1.addTask(fetchTask);
+            dispatch({ type: 'REQUEST_DASHBOARD', id: id });
+        }
+    }; }
+};
+var unloadedState = {
+    id: null,
+    isLoading: false,
+    json: null,
+    chartIds: null,
+    charts: null
+};
+exports.reducer = function (state, action) {
+    switch (action.type) {
+        case 'REQUEST_DASHBOARD':
+            return {
+                id: action.id,
+                json: state.json,
+                isLoading: true,
+                chartIds: state.chartIds,
+                charts: state.charts
+            };
+        case 'RECEIVE_DASHBOARD':
+            var ids_1 = [];
+            var chartStates_1 = [];
+            action.json.canvas.charts.forEach(function (c) {
+                ids_1.push(c.chart_id);
+            });
+            action.json.canvas.charts.forEach(function (c) {
+                chartStates_1.push(c);
+            });
+            return {
+                id: action.json.canvas.id,
+                json: action.json,
+                isLoading: false,
+                chartIds: ids_1,
+                charts: chartStates_1
+            };
+        default:
+            var exhaustiveCheck = action;
+    }
+    return state || unloadedState;
+};
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Code\\Analysis\\ClientApp\\store\\Dashboard.ts"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Code\\Analysis\\ClientApp\\store\\Dashboard.ts"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
@@ -2764,10 +2764,14 @@ function renderApp() {
 renderApp();
 // Allow Hot Module Replacement
 if (true) {
+    console.log("HMR(true)");
     module.hot.accept(27, function () {
         routes = __webpack_require__(27).routes;
         renderApp();
     });
+}
+else {
+    console.log("HMR(false)");
 }
 
 
@@ -7731,133 +7735,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(2);
-var ChartContainer_1 = __webpack_require__(188);
-var Canvas = (function (_super) {
-    __extends(Canvas, _super);
-    //constructor(CanvasProps) {
-    //    super(CanvasProps);
-    //    this.state = {
-    //        id: CanvasProps.chart_id,
-    //        isLoading: CanvasProps.chart_type,
-    //        json: CanvasProps.chart_inEdit,
-    //        chartIds: CanvasProps.chart_loading,
-    //        charts: CanvasProps....
-    //    };
-    //}
-    function Canvas(CanvasProps) {
-        var _this = _super.call(this, CanvasProps) || this;
-        console.log('constructor');
-        console.log(_this.props);
-        return _this;
-    }
-    Canvas.prototype.render = function () {
-        console.log('render()_canvas');
-        console.log(this.props);
-        return React.createElement("div", null,
-            React.createElement("span", null, "dpb"),
-            this.renderCanvas());
-    };
-    //chart_id: string;
-    //chart_type: string;
-    //chart_inEdit: string;
-    //chart_loading: boolean;
-    //key = { chartContainer.chart_id }
-    //chart_id = { chartContainer.chart_id }
-    //chart_type = { chartContainer.chart_type }
-    //chart_inEdit = { chartContainer.chart_inEdit }
-    //chart_loading = { chartContainer.chart_loading }
-    Canvas.prototype.renderCanvas = function () {
-        console.log('renderCanvas()');
-        console.log(this.props);
-        if (this.props.chartIds) {
-            return React.createElement("div", null,
-                this.props.chartIds.map(function (id) {
-                    return React.createElement("div", { key: id, className: 'col-sm-3 cardstock' }, id);
-                }),
-                console.log('has chartIds'),
-                this.props.charts.map(function (chartContainer) {
-                    return React.createElement(ChartContainer_1.default, { key: chartContainer.chart_id, chart_id: chartContainer.chart_id, chart_type: chartContainer.chart_type, chart_inEdit: chartContainer.chart_inEdit, chart_loading: chartContainer.chart_loading });
-                }));
-        }
-    };
-    return Canvas;
-}(React.Component));
-exports.default = Canvas;
-
-
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Code\\Analysis\\ClientApp\\components\\Canvas.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Code\\Analysis\\ClientApp\\components\\Canvas.tsx"); } } })();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 187 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(2);
 var react_redux_1 = __webpack_require__(11);
-var CanvasState = __webpack_require__(59);
-var Canvas_1 = __webpack_require__(186);
-var CanvasContainer = (function (_super) {
-    __extends(CanvasContainer, _super);
-    function CanvasContainer() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    CanvasContainer.prototype.componentWillMount = function () {
-        var id = "";
-        this.props.requestCanvas(id);
-    };
-    CanvasContainer.prototype.componentWillReceiveProps = function (nextProps) {
-        this.props.requestCanvas(nextProps.id);
-    };
-    CanvasContainer.prototype.render = function () {
-        return (React.createElement("div", null,
-            React.createElement(Canvas_1.default, { id: this.props.id, isLoading: this.props.isLoading, json: this.props.json, chartIds: this.props.chartIds, charts: this.props.charts }),
-            React.createElement("div", null,
-                React.createElement("br", null),
-                React.createElement("h1", null, this.props.id),
-                React.createElement("h1", null, JSON.stringify(this.props.json)),
-                React.createElement("h1", null, this.props.isLoading ? React.createElement("span", null, "Loading...") : React.createElement("span", null, "Not loading...")))));
-    };
-    return CanvasContainer;
-}(React.Component));
-exports.default = react_redux_1.connect(function (state) { return state.canvas; }, CanvasState.actionCreators)(CanvasContainer);
-
-
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Code\\Analysis\\ClientApp\\components\\CanvasContainer.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Code\\Analysis\\ClientApp\\components\\CanvasContainer.tsx"); } } })();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 188 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(2);
-var react_redux_1 = __webpack_require__(11);
-var ChartState = __webpack_require__(60);
+var ChartState = __webpack_require__(59);
 var ChartContainer = (function (_super) {
     __extends(ChartContainer, _super);
     function ChartContainer() {
@@ -7865,28 +7744,53 @@ var ChartContainer = (function (_super) {
     }
     //constructor(ChartProps) {
     //    super(ChartProps);
+    //    console.log('constructor(ChartProps)');
+    //    console.log(this.props);
+    //    console.log(this.context);
+    //    console.log(this.state);
+    //    console.log(this);
+    //    console.log(this.refs);
     //    this.state = {
     //        chart_id: ChartProps.chart_id,
     //        chart_type: ChartProps.chart_type,
     //        chart_inEdit: ChartProps.chart_inEdit,
     //        chart_loading: ChartProps.chart_loading,
     //    };
+    //    console.log(ChartProps.chart_id);
     //}
-    //componentWillReceiveProps(nextProps: ChartProps) {
-    //    this.props.getChart(nextProps.chart_id);
-    //}
+    ChartContainer.prototype.componentWillMount = function () {
+        console.log('componentWillMount()_ChartContainer');
+        console.log(this.props);
+        console.log(this.context);
+        console.log(this.state);
+        console.log(this);
+        console.log(this.refs);
+    };
+    ChartContainer.prototype.componentWillReceiveProps = function (nextProps) {
+        console.log('componentWillReceiveProps()_ChartContainer');
+        console.log(this.props);
+        console.log(this.context);
+        console.log(this.state);
+        console.log(this);
+        console.log(this.refs);
+    };
     ChartContainer.prototype.render = function () {
         console.log('render()_chart');
         console.log(this.props);
+        console.log(this.context);
+        console.log(this.state);
+        console.log(this);
+        console.log(this.refs);
         return React.createElement("div", null, this.renderChart());
     };
     ChartContainer.prototype.renderChart = function () {
+        {
+            console.log('renderChart()');
+        }
+        console.log(this.props.chart_id);
         if (this.props.chart_id) {
             {
-                console.log('renderChart()');
-            }
-            {
-                console.log('renderChart()');
+                console.log('renderChart() - chart_id not null');
             }
             return React.createElement("div", null,
                 React.createElement("h1", null,
@@ -7904,14 +7808,15 @@ var ChartContainer = (function (_super) {
     };
     return ChartContainer;
 }(React.Component));
-exports.default = react_redux_1.connect(function (state) { return state.chart; }, ChartState.actionCreators)(ChartContainer);
+var connectedStateandProps = react_redux_1.connect(function (state) { return state.chart; }, ChartState.actionCreators);
+exports.default = connectedStateandProps(ChartContainer);
 
 
  ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Code\\Analysis\\ClientApp\\components\\ChartContainer.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Code\\Analysis\\ClientApp\\components\\ChartContainer.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 189 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7954,6 +7859,138 @@ CounterStore.actionCreators // Selects which action creators are merged into the
 
 
  ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Code\\Analysis\\ClientApp\\components\\Counter.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Code\\Analysis\\ClientApp\\components\\Counter.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(2);
+var ChartContainer_1 = __webpack_require__(186);
+var Dashboard = (function (_super) {
+    __extends(Dashboard, _super);
+    //constructor(DashboardProps) {
+    //    super(DashboardProps);
+    //    this.state = {
+    //        id: DashboardProps.chart_id,
+    //        isLoading: DashboardProps.chart_type,
+    //        json: DashboardProps.chart_inEdit,
+    //        chartIds: DashboardProps.chart_loading,
+    //        charts: DashboardProps....
+    //    };
+    //}
+    function Dashboard(DashboardProps) {
+        var _this = _super.call(this, DashboardProps) || this;
+        console.log('constructor');
+        console.log(_this.props);
+        return _this;
+    }
+    Dashboard.prototype.render = function () {
+        console.log('render()_Dashboard');
+        console.log(this.props);
+        return React.createElement("div", null,
+            React.createElement("span", null, "dpb"),
+            this.renderDashboard());
+    };
+    //chart_id: string;
+    //chart_type: string;
+    //chart_inEdit: string;
+    //chart_loading: boolean;
+    //key = { chartContainer.chart_id }
+    //chart_id = { chartContainer.chart_id }
+    //chart_type = { chartContainer.chart_type }
+    //chart_inEdit = { chartContainer.chart_inEdit }
+    //chart_loading = { chartContainer.chart_loading }
+    Dashboard.prototype.renderDashboard = function () {
+        console.log('renderDashboard()');
+        console.log(this.props);
+        if (this.props.chartIds) {
+            return React.createElement("div", null,
+                this.props.chartIds.map(function (id) {
+                    return React.createElement("div", { key: id, className: 'col-sm-3 cardstock' }, id);
+                }),
+                console.log('has chartIds'),
+                this.props.charts.map(function (chartContainer) {
+                    return React.createElement(ChartContainer_1.default, { key: chartContainer.chart_id, chart_id: chartContainer.chart_id, chart_type: chartContainer.chart_type, chart_inEdit: chartContainer.chart_inEdit, chart_loading: chartContainer.chart_loading });
+                }));
+        }
+    };
+    return Dashboard;
+}(React.Component));
+exports.default = Dashboard;
+//export default connect(
+//    (state: ApplicationState) => state.canvas, // Selects which state properties are merged into the component's props
+//    DashboardState.actionCreators                 // Selects which action creators are merged into the component's props
+//)(Dashboard) as typeof Dashboard; 
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Code\\Analysis\\ClientApp\\components\\Dashboard.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Code\\Analysis\\ClientApp\\components\\Dashboard.tsx"); } } })();
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(2);
+var react_redux_1 = __webpack_require__(11);
+var DashboardState = __webpack_require__(60);
+var Dashboard_1 = __webpack_require__(188);
+var DashboardContainer = (function (_super) {
+    __extends(DashboardContainer, _super);
+    function DashboardContainer() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    DashboardContainer.prototype.componentWillMount = function () {
+        console.log('componentWillMount()_DashboardContainer');
+        var id = "";
+        this.props.requestDashboard(id);
+    };
+    DashboardContainer.prototype.componentWillReceiveProps = function (nextProps) {
+        console.log('componentWillReceiveProps()_DashboardContainer');
+        this.props.requestDashboard(nextProps.id);
+    };
+    DashboardContainer.prototype.render = function () {
+        return (React.createElement("div", null,
+            React.createElement(Dashboard_1.default, { id: this.props.id, isLoading: this.props.isLoading, json: this.props.json, chartIds: this.props.chartIds, charts: this.props.charts }),
+            React.createElement("div", null,
+                React.createElement("br", null),
+                React.createElement("h1", null, this.props.id),
+                React.createElement("h1", null, JSON.stringify(this.props.json)),
+                React.createElement("h1", null, this.props.isLoading ? React.createElement("span", null, "Loading...") : React.createElement("span", null, "Not loading...")))));
+    };
+    return DashboardContainer;
+}(React.Component));
+var connectedStateandProps = react_redux_1.connect(function (state) { return state.dashboard; }, DashboardState.actionCreators);
+exports.default = connectedStateandProps(DashboardContainer);
+
+
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Code\\Analysis\\ClientApp\\components\\DashboardContainer.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Code\\Analysis\\ClientApp\\components\\DashboardContainer.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),

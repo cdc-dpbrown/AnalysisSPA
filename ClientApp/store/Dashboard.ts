@@ -3,7 +3,7 @@ import { Action, Reducer, ActionCreator } from 'redux';
 import { AppThunkAction } from './';
 import { ChartState } from 'ClientApp/store/Chart';
 
-export interface CanvasState {
+export interface DashboardState {
     id: string;
     isLoading: boolean;
     json: any;
@@ -11,36 +11,36 @@ export interface CanvasState {
     charts: ChartState[];
 }
 
-interface RequestCanvasAction {
-    type: 'REQUEST_CANVAS';
+interface RequestDashboardAction {
+    type: 'REQUEST_DASHBOARD';
     id: string;
 }
 
-interface ReceiveCanvasAction {
-    type: 'RECEIVE_CANVAS';
+interface ReceiveDashboardAction {
+    type: 'RECEIVE_DASHBOARD';
     id: string;
     json: any;
     charts: any;
 }
 
-type CanvasAction = RequestCanvasAction | ReceiveCanvasAction;
+type DashboardAction = RequestDashboardAction | ReceiveDashboardAction;
 
 export const actionCreators = {
-    requestCanvas: (id: string): AppThunkAction<CanvasAction> => (dispatch, getState) => {
-        if (id !== getState().canvas.id) {
-            let fetchTask = fetch(`/api/SettingsData/Canvas?id=${ id }`)
+    requestDashboard: (id: string): AppThunkAction<DashboardAction> => (dispatch, getState) => {
+        if (id !== getState().dashboard.id) {
+            let fetchTask = fetch(`/api/SettingsData/Dashboard?id=${ id }`)
                 .then(response => response.json() as Promise<any>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_CANVAS', id: id, json:data, charts: null });
+                    dispatch({ type: 'RECEIVE_DASHBOARD', id: id, json:data, charts: null });
                 });
 
             addTask(fetchTask); 
-            dispatch({ type: 'REQUEST_CANVAS', id: id });
+            dispatch({ type: 'REQUEST_DASHBOARD', id: id });
         }
     }
 };
 
-const unloadedState: CanvasState = {
+const unloadedState: DashboardState = {
     id: null,
     isLoading: false,
     json: null,
@@ -48,10 +48,10 @@ const unloadedState: CanvasState = {
     charts: null
 };
 
-export const reducer: Reducer<CanvasState> = (state: CanvasState, action: CanvasAction) => {
+export const reducer: Reducer<DashboardState> = (state: DashboardState, action: DashboardAction) => {
     switch (action.type) {
 
-        case 'REQUEST_CANVAS':
+        case 'REQUEST_DASHBOARD':
             return {
                 id: action.id,
                 json: state.json,
@@ -60,7 +60,7 @@ export const reducer: Reducer<CanvasState> = (state: CanvasState, action: Canvas
                 charts: state.charts
             };
 
-        case 'RECEIVE_CANVAS':
+        case 'RECEIVE_DASHBOARD':
             let ids: string[] = [];
             let chartStates: ChartState[] = []; 
 
