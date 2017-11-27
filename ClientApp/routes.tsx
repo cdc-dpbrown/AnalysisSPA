@@ -6,9 +6,7 @@ import SelectDataSource from './components/SelectDataSource';
 import FetchData from './components/FetchData';
 import Counter from './components/Counter';
 
-import DashboardContainer from './components/DashboardContainer';
 import Dashboard from './components/Dashboard';
-import ChartContainer from './components/ChartContainer';
 import Chart from './components/Chart';
 
 import SettingsDialog from './components/SettingsDialog';
@@ -17,7 +15,7 @@ import OpenCanvas from './components/OpenCanvas';
 export const routes = <Layout>
     <Route exact path='/' component={ Home } />
     <Route path='/set-data-source' component={SelectDataSource} />
-    <Route path='/open' component={DashboardContainer} />
+    <Route path='/open' component={Dashboard} />
     <Route path='/save' component={Counter} />
     <Route path='/save-as' component={Counter} />
     <Route path='/variables' component={Counter} />
