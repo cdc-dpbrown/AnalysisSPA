@@ -35,8 +35,23 @@ class Chart extends React.Component<ChartProps, {}> {
     private renderChart() {
         if (this) {
             console.log("renderChart()");
-            return <div>
-                <h3>[ chart id={this.props.chart_id} ]</h3>
+            var wrapperDivClassName = "chartRender col-sm-3 cardstock";
+
+            if (this.props.chart_isFullScreen) {
+                wrapperDivClassName = "chartRender col-sm-12 cardstock";
+            }
+
+            return <div key={this.props.chart_id} className={wrapperDivClassName}>
+                <div className='chart'>
+                    <div className='chartSettingsButton' id='settingsButton' onClick={this.handleStartEdit.bind(this)}>...</div>
+                    <h3>[ chart id={this.props.chart_id} ]</h3>
+                </div>
+                <div className='chartSettings'>
+                    <button className='chartSettingsButton' id='settingsButton' onClick={this.handleStartEdit.bind(this)}>...</button>
+                    <button className='chartFullButton' id='fullButton' onClick={() => { this.props.toggleFullScreen(this.props.chart_isFullScreen).bind(this) }}>[]</button>
+                    <p>[ chart id={this.props.chart_id} ]</p>
+                    <p>[ chart_isFullScreen={this.props.chart_isFullScreen} ]</p>
+                </div>
             </div>;
         }
     }
@@ -45,5 +60,5 @@ class Chart extends React.Component<ChartProps, {}> {
     }
 }
 
-const ChartContainer = connect((state: ApplicationState) => state, ChartState.actionCreators);
+const ChartContainer = connect((state: ApplicationState) => state.chart, ChartState.actionCreators);
 export default ChartContainer(Chart) as typeof Chart;

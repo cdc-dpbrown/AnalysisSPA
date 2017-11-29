@@ -36,18 +36,18 @@ class Dashboard extends React.Component<DashboardProps, {}> {
                 {console.log('has chartIds')}
                 {
                     this.props.charts.map(chart =>
-                        <div key={chart.chart_id} className='col-sm-3 cardstock'>
-                            <Chart
-                                key={chart.chart_id}
-                                chart_id={chart.chart_id}
-                                chart_type={chart.chart_type}
-                                chart_inEdit={chart.chart_inEdit}
-                                chart_loading={chart.chart_loading}
-                                match={this.props.match}
-                                location={this.props.location}
-                                history={this.props.history}
-                            />
-                        </div>
+                        <Chart
+                            key={chart.chart_id}
+                            chart_id={chart.chart_id}
+                            chart_type={chart.chart_type}
+                            chart_inEdit={chart.chart_inEdit}
+                            chart_loading={chart.chart_loading}
+                            chart_isFullScreen={chart.chart_isFullScreen}
+                            chart_isFullWidth={chart.chart_isFullWidth}
+                            match={this.props.match}
+                            location={this.props.location}
+                            history={this.props.history}
+                        />
                     )
                 }
             </div>;

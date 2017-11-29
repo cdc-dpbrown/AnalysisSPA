@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "755e90d8894ba7bf886d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ace56c4caf40eb0a0ffe"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2499,12 +2499,18 @@ if (!module.hot || process.env.NODE_ENV === 'production') {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.actionCreators = {};
+exports.actionCreators = {
+    toggleFullScreen: function (isFull) { return function (dispatch, getState) {
+        dispatch({ type: 'TOGGLE_FULL_SCREEN', chart_isFullScreen: getState().chart.chart_isFullScreen });
+    }; }
+};
 var unloadedState = {
     chart_id: null,
     chart_type: null,
     chart_inEdit: null,
     chart_loading: false,
+    chart_isFullScreen: false,
+    chart_isFullWidth: false,
 };
 exports.reducer = function (state, action) {
     switch (action.type) {
@@ -2522,6 +2528,10 @@ exports.reducer = function (state, action) {
                 chart_type: null,
                 chart_inEdit: null,
                 chart_loading: false
+            };
+        case 'TOGGLE_FULL_SCREEN':
+            return {
+                chart_isFullScreen: action.chart_isFullScreen === true ? false : true
             };
         case 'GET_CHART':
             return {
@@ -7741,48 +7751,42 @@ var Chart = (function (_super) {
         console.log(this);
         console.log(this.refs);
     };
-    //static propTypes = {
-    //    //chart: React.PropTypes.shape({
-    //    //    chart_id: React.PropTypes.string,
-    //    //    chart_type: React.PropTypes.string,
-    //    //    chart_inEdit: React.PropTypes.string,
-    //    //    chart_loading: React.PropTypes.string,
-    //    //}).isRequired,
-    //    //onSave: React.PropTypes.func.isRequired,
-    //    //onCancel: React.PropTypes.func.isRequired,
-    //};
-    //constructor(props) {
-    //    super(props);
-    //    //this.state = {
-    //    //    chart_id: this.props.chart_id,
-    //    //    chart_type: this.props.chart_type,
-    //    //    chart_inEdit: this.props.chart_inEdit,
-    //    //    chart_loading: this.props.chart_loading,
-    //    //};
-    //}
-    //                <button onClick={this.handleStartEdit.bind(this)}>Eder</button>
-    //<div className='rate-control red' rate-value="95"><p>92%</p></div>
-    //<div>
-    //    <h1>{this.props.chart_id} </h1>
-    //</div>;
     Chart.prototype.render = function () {
         return React.createElement("div", null, this.renderChart());
     };
     Chart.prototype.renderChart = function () {
+        var _this = this;
         if (this) {
             console.log("renderChart()");
-            return React.createElement("div", null,
-                React.createElement("h3", null,
-                    "[ chart id=",
-                    this.props.chart_id,
-                    " ]"));
+            var wrapperDivClassName = "chartRender col-sm-3 cardstock";
+            if (this.props.chart_isFullScreen) {
+                wrapperDivClassName = "chartRender col-sm-12 cardstock";
+            }
+            return React.createElement("div", { key: this.props.chart_id, className: wrapperDivClassName },
+                React.createElement("div", { className: 'chart' },
+                    React.createElement("div", { className: 'chartSettingsButton', id: 'settingsButton', onClick: this.handleStartEdit.bind(this) }, "..."),
+                    React.createElement("h3", null,
+                        "[ chart id=",
+                        this.props.chart_id,
+                        " ]")),
+                React.createElement("div", { className: 'chartSettings' },
+                    React.createElement("button", { className: 'chartSettingsButton', id: 'settingsButton', onClick: this.handleStartEdit.bind(this) }, "..."),
+                    React.createElement("button", { className: 'chartFullButton', id: 'fullButton', onClick: function () { _this.props.toggleFullScreen(_this.props.chart_isFullScreen).bind(_this); } }, "[]"),
+                    React.createElement("p", null,
+                        "[ chart id=",
+                        this.props.chart_id,
+                        " ]"),
+                    React.createElement("p", null,
+                        "[ chart_isFullScreen=",
+                        this.props.chart_isFullScreen,
+                        " ]")));
         }
     };
     Chart.prototype.handleStartEdit = function () {
     };
     return Chart;
 }(React.Component));
-var ChartContainer = react_redux_1.connect(function (state) { return state; }, ChartState.actionCreators);
+var ChartContainer = react_redux_1.connect(function (state) { return state.chart; }, ChartState.actionCreators);
 exports.default = ChartContainer(Chart);
 
 
@@ -7873,14 +7877,8 @@ var Dashboard = (function (_super) {
     Dashboard.prototype.render = function () {
         console.log('render()_Dashboard');
         console.log(this.props);
-        return React.createElement("div", null,
-            React.createElement("span", null, "dpb"),
-            this.renderDashboard());
+        return React.createElement("div", null, this.renderDashboard());
     };
-    //                    {this.props.chartIds.map(id =>
-    //    <div key={id} className='col-sm-3 cardstock'>{id}</div>
-    //)
-    //}
     Dashboard.prototype.renderDashboard = function () {
         var _this = this;
         console.log('renderDashboard()');
@@ -7889,10 +7887,8 @@ var Dashboard = (function (_super) {
             return React.createElement("div", null,
                 console.log('has chartIds'),
                 this.props.charts.map(function (chart) {
-                    return React.createElement("div", { key: chart.chart_id, className: 'col-sm-3 cardstock' },
-                        React.createElement(Chart_1.default, { key: chart.chart_id, chart_id: chart.chart_id, chart_type: chart.chart_type, chart_inEdit: chart.chart_inEdit, chart_loading: chart.chart_loading, match: _this.props.match, location: _this.props.location, history: _this.props.history }));
-                }),
-                "}");
+                    return React.createElement(Chart_1.default, { key: chart.chart_id, chart_id: chart.chart_id, chart_type: chart.chart_type, chart_inEdit: chart.chart_inEdit, chart_loading: chart.chart_loading, chart_isFullScreen: chart.chart_isFullScreen, chart_isFullWidth: chart.chart_isFullWidth, match: _this.props.match, location: _this.props.location, history: _this.props.history });
+                }));
         }
     };
     return Dashboard;
