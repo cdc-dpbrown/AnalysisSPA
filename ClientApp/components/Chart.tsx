@@ -4,26 +4,24 @@ import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import * as ChartState from '../store/Chart';
 
-type ChartProps = ChartState.ChartState & typeof ChartState.actionCreators & RouteComponentProps<{ id: string }>; 
+type ChartProps = ChartState.ChartState
+    & typeof ChartState.actionCreators
+    & RouteComponentProps<{ id: string }>; 
 
 class Chart extends React.Component<ChartProps, {}> {
 
     componentWillMount() {
         console.log('componentWillMount()_Chart');
-        console.log(this.props);
-        console.log(this.context);
-        console.log(this.state);
         console.log(this);
-        console.log(this.refs);
     }
 
     componentWillReceiveProps(nextProps: ChartProps) {
         console.log('componentWillReceiveProps()_Chart');
-        console.log(this.props);
-        console.log(this.context);
-        console.log(this.state);
         console.log(this);
-        console.log(this.refs);
+        console.log("nextProps");
+        console.log(nextProps);
+        this.state = nextProps;
+        console.log(this);
     }
 
     public render() {
@@ -35,6 +33,7 @@ class Chart extends React.Component<ChartProps, {}> {
     private renderChart() {
         if (this) {
             console.log("renderChart()");
+            console.log(this);
             var wrapperDivClassName = "chartRender col-sm-3 cardstock";
 
             if (this.props.chart_isFullScreen) {
@@ -48,7 +47,7 @@ class Chart extends React.Component<ChartProps, {}> {
                 </div>
                 <div className='chartSettings'>
                     <button className='chartSettingsButton' id='settingsButton' onClick={this.handleStartEdit.bind(this)}>...</button>
-                    <button className='chartFullButton' id='fullButton' onClick={() => { this.props.toggleFullScreen(this.props.chart_isFullScreen).bind(this) }}>[]</button>
+                    <button className='chartFullButton' id='fullButton' onClick={() => {this.props.toggleFullScreen(this.props.chart_id).bind(this)}}>[]</button>
                     <p>[ chart id={this.props.chart_id} ]</p>
                     <p>[ chart_isFullScreen={this.props.chart_isFullScreen} ]</p>
                 </div>
@@ -60,5 +59,6 @@ class Chart extends React.Component<ChartProps, {}> {
     }
 }
 
-const ChartContainer = connect((state: ApplicationState) => state.chart, ChartState.actionCreators);
+const mapStateToProps = (state: ApplicationState) => (state.chart);
+const ChartContainer = connect(mapStateToProps, ChartState.actionCreators);
 export default ChartContainer(Chart) as typeof Chart;

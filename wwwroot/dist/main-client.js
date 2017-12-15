@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ace56c4caf40eb0a0ffe"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "64f6af4754ea73db2e8e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2500,8 +2500,8 @@ if (!module.hot || process.env.NODE_ENV === 'production') {
 /* WEBPACK VAR INJECTION */(function(process) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.actionCreators = {
-    toggleFullScreen: function (isFull) { return function (dispatch, getState) {
-        dispatch({ type: 'TOGGLE_FULL_SCREEN', chart_isFullScreen: getState().chart.chart_isFullScreen });
+    toggleFullScreen: function (id) { return function (dispatch, getState) {
+        dispatch({ type: 'TOGGLE_FULL_SCREEN', chart_id: id });
     }; }
 };
 var unloadedState = {
@@ -2530,8 +2530,14 @@ exports.reducer = function (state, action) {
                 chart_loading: false
             };
         case 'TOGGLE_FULL_SCREEN':
+            console.log("TOGGLE_FULL_SCREEN");
+            console.log("state");
+            console.log(state);
+            console.log("action");
+            console.log(action);
             return {
-                chart_isFullScreen: action.chart_isFullScreen === true ? false : true
+                chart_id: action.chart_id,
+                chart_isFullScreen: state.chart_isFullScreen === true ? false : true
             };
         case 'GET_CHART':
             return {
@@ -2581,6 +2587,11 @@ var unloadedState = {
 exports.reducer = function (state, action) {
     switch (action.type) {
         case 'REQUEST_DASHBOARD':
+            console.log("REQUEST_DASHBOARD");
+            console.log("state");
+            console.log(state);
+            console.log("action");
+            console.log(action);
             return {
                 id: action.id,
                 json: state.json,
@@ -2589,14 +2600,28 @@ exports.reducer = function (state, action) {
                 charts: state.charts
             };
         case 'RECEIVE_DASHBOARD':
+            console.log("RECEIVE_DASHBOARD");
+            console.log("state");
+            console.log(state);
+            console.log("action");
+            console.log(action);
             var ids_1 = [];
             var chartStates_1 = [];
             action.json.canvas.charts.forEach(function (c) {
                 ids_1.push(c.chart_id);
             });
             action.json.canvas.charts.forEach(function (c) {
-                chartStates_1.push(c);
+                chartStates_1.push({
+                    chart_id: c.chart_id,
+                    chart_type: c.chart_type,
+                    chart_inEdit: c.chart_inEdit,
+                    chart_loading: c.chart_loading === true ? true : false,
+                    chart_isFullScreen: c.chart_isFullScreen === true ? true : false,
+                    chart_isFullWidth: c.chart_isFullWidth === true ? true : false,
+                });
             });
+            console.log('print chartStates');
+            console.log(chartStates_1);
             return {
                 id: action.json.canvas.id,
                 json: action.json,
@@ -7737,19 +7762,15 @@ var Chart = (function (_super) {
     }
     Chart.prototype.componentWillMount = function () {
         console.log('componentWillMount()_Chart');
-        console.log(this.props);
-        console.log(this.context);
-        console.log(this.state);
         console.log(this);
-        console.log(this.refs);
     };
     Chart.prototype.componentWillReceiveProps = function (nextProps) {
         console.log('componentWillReceiveProps()_Chart');
-        console.log(this.props);
-        console.log(this.context);
-        console.log(this.state);
         console.log(this);
-        console.log(this.refs);
+        console.log("nextProps");
+        console.log(nextProps);
+        this.state = nextProps;
+        console.log(this);
     };
     Chart.prototype.render = function () {
         return React.createElement("div", null, this.renderChart());
@@ -7758,6 +7779,7 @@ var Chart = (function (_super) {
         var _this = this;
         if (this) {
             console.log("renderChart()");
+            console.log(this);
             var wrapperDivClassName = "chartRender col-sm-3 cardstock";
             if (this.props.chart_isFullScreen) {
                 wrapperDivClassName = "chartRender col-sm-12 cardstock";
@@ -7771,7 +7793,7 @@ var Chart = (function (_super) {
                         " ]")),
                 React.createElement("div", { className: 'chartSettings' },
                     React.createElement("button", { className: 'chartSettingsButton', id: 'settingsButton', onClick: this.handleStartEdit.bind(this) }, "..."),
-                    React.createElement("button", { className: 'chartFullButton', id: 'fullButton', onClick: function () { _this.props.toggleFullScreen(_this.props.chart_isFullScreen).bind(_this); } }, "[]"),
+                    React.createElement("button", { className: 'chartFullButton', id: 'fullButton', onClick: function () { _this.props.toggleFullScreen(_this.props.chart_id).bind(_this); } }, "[]"),
                     React.createElement("p", null,
                         "[ chart id=",
                         this.props.chart_id,
@@ -7786,7 +7808,8 @@ var Chart = (function (_super) {
     };
     return Chart;
 }(React.Component));
-var ChartContainer = react_redux_1.connect(function (state) { return state.chart; }, ChartState.actionCreators);
+var mapStateToProps = function (state) { return (state.chart); };
+var ChartContainer = react_redux_1.connect(mapStateToProps, ChartState.actionCreators);
 exports.default = ChartContainer(Chart);
 
 
@@ -7855,6 +7878,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(2);
 var react_redux_1 = __webpack_require__(11);
@@ -7867,27 +7898,33 @@ var Dashboard = (function (_super) {
     }
     Dashboard.prototype.componentWillMount = function () {
         console.log('componentWillMount()_Dashboard');
+        console.log(this);
         var id = "";
         this.props.requestDashboard(id);
     };
     Dashboard.prototype.componentWillReceiveProps = function (nextProps) {
         console.log('componentWillReceiveProps()_Dashboard');
+        console.log(this);
+        console.log("nextProps");
+        console.log(nextProps);
+        this.state = nextProps;
+        console.log(this);
         this.props.requestDashboard(nextProps.id);
     };
     Dashboard.prototype.render = function () {
         console.log('render()_Dashboard');
-        console.log(this.props);
+        console.log(this);
         return React.createElement("div", null, this.renderDashboard());
     };
     Dashboard.prototype.renderDashboard = function () {
         var _this = this;
         console.log('renderDashboard()');
-        console.log(this.props);
+        console.log(this);
         if (this.props.chartIds) {
             return React.createElement("div", null,
                 console.log('has chartIds'),
                 this.props.charts.map(function (chart) {
-                    return React.createElement(Chart_1.default, { key: chart.chart_id, chart_id: chart.chart_id, chart_type: chart.chart_type, chart_inEdit: chart.chart_inEdit, chart_loading: chart.chart_loading, chart_isFullScreen: chart.chart_isFullScreen, chart_isFullWidth: chart.chart_isFullWidth, match: _this.props.match, location: _this.props.location, history: _this.props.history });
+                    return React.createElement(Chart_1.default, __assign({}, chart, { key: chart.chart_id, match: _this.props.match, location: _this.props.location, history: _this.props.history, toggleFullScreen: _this.props.toggleFullScreen }));
                 }));
         }
     };

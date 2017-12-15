@@ -4,25 +4,35 @@ import { connect } from 'react-redux';
 import { ApplicationState }  from '../store';
 import * as DashboardState from '../store/Dashboard';
 import Chart from '../components/Chart';
+import * as ChartState from '../store/Chart';
 
-type DashboardProps = DashboardState.DashboardState & typeof DashboardState.actionCreators & RouteComponentProps<{ id: string }>; 
+type DashboardProps = DashboardState.DashboardState
+    & typeof DashboardState.actionCreators
+    & typeof ChartState.actionCreators
+    & RouteComponentProps<{ id: string }>; 
 
 class Dashboard extends React.Component<DashboardProps, {}> {
 
     componentWillMount() {
         console.log('componentWillMount()_Dashboard');
+        console.log(this);
         let id = "";
         this.props.requestDashboard(id);
     }
 
     componentWillReceiveProps(nextProps: DashboardProps) {
         console.log('componentWillReceiveProps()_Dashboard');
+        console.log(this);
+        console.log("nextProps");
+        console.log(nextProps);
+        this.state = nextProps;
+        console.log(this);
         this.props.requestDashboard(nextProps.id);
     }
 
     public render() {
         console.log('render()_Dashboard');
-        console.log(this.props);
+        console.log(this);
         return <div>
             {this.renderDashboard()}
         </div>;
@@ -30,23 +40,19 @@ class Dashboard extends React.Component<DashboardProps, {}> {
 
     private renderDashboard() {
         console.log('renderDashboard()');
-        console.log(this.props);
+        console.log(this);
         if (this.props.chartIds) {
             return <div>
                 {console.log('has chartIds')}
                 {
                     this.props.charts.map(chart =>
                         <Chart
+                            {...chart }
                             key={chart.chart_id}
-                            chart_id={chart.chart_id}
-                            chart_type={chart.chart_type}
-                            chart_inEdit={chart.chart_inEdit}
-                            chart_loading={chart.chart_loading}
-                            chart_isFullScreen={chart.chart_isFullScreen}
-                            chart_isFullWidth={chart.chart_isFullWidth}
                             match={this.props.match}
                             location={this.props.location}
                             history={this.props.history}
+                            toggleFullScreen={this.props.toggleFullScreen}
                         />
                     )
                 }

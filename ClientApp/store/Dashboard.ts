@@ -52,6 +52,12 @@ export const reducer: Reducer<DashboardState> = (state: DashboardState, action: 
     switch (action.type) {
 
         case 'REQUEST_DASHBOARD':
+            console.log("REQUEST_DASHBOARD");
+            console.log("state");
+            console.log(state);
+            console.log("action");
+            console.log(action);
+
             return {
                 id: action.id,
                 json: state.json,
@@ -61,6 +67,12 @@ export const reducer: Reducer<DashboardState> = (state: DashboardState, action: 
             };
 
         case 'RECEIVE_DASHBOARD':
+            console.log("RECEIVE_DASHBOARD");
+            console.log("state");
+            console.log(state);
+            console.log("action");
+            console.log(action);
+
             let ids: string[] = [];
             let chartStates: ChartState[] = []; 
 
@@ -69,8 +81,18 @@ export const reducer: Reducer<DashboardState> = (state: DashboardState, action: 
             })
 
             action.json.canvas.charts.forEach((c) => {
-                chartStates.push(c);
+                chartStates.push({
+                    chart_id: c.chart_id,
+                    chart_type: c.chart_type,
+                    chart_inEdit: c.chart_inEdit,
+                    chart_loading: c.chart_loading === true ? true : false,
+                    chart_isFullScreen: c.chart_isFullScreen === true ? true : false,
+                    chart_isFullWidth: c.chart_isFullWidth === true ? true : false,
+                });
             })
+
+            console.log('print chartStates');
+            console.log(chartStates);
 
             return {
                 id: action.json.canvas.id,
@@ -79,7 +101,7 @@ export const reducer: Reducer<DashboardState> = (state: DashboardState, action: 
                 chartIds: ids,
                 charts: chartStates
             };
-   
+
         default:
             const exhaustiveCheck: never = action;
     }

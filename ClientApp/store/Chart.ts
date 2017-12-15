@@ -32,14 +32,15 @@ interface GetChartAction {
 
 interface ToggleFullScreen {
     type: 'TOGGLE_FULL_SCREEN';
-    chart_isFullScreen: boolean;
+    chart_id: string;
 }
 
-type ChartAction = RequestChartAction | ReceiveChartAction | GetChartAction | ToggleFullScreen;
+//type ChartAction = RequestChartAction | ReceiveChartAction | GetChartAction | ToggleFullScreen;
+type ChartActions = RequestChartAction | ReceiveChartAction | GetChartAction | ToggleFullScreen;
 
 export const actionCreators = {
-    toggleFullScreen: (isFull: boolean): AppThunkAction<ChartAction> => (dispatch, getState) => {
-        dispatch({ type: 'TOGGLE_FULL_SCREEN', chart_isFullScreen: getState().chart.chart_isFullScreen });
+    toggleFullScreen: (id: string): AppThunkAction<ChartActions> => (dispatch, getState) => {
+        dispatch({ type: 'TOGGLE_FULL_SCREEN', chart_id: id });
     }
 };
 
@@ -52,7 +53,7 @@ const unloadedState: ChartState = {
     chart_isFullWidth: false,
 };
 
-export const reducer: Reducer<ChartState> = (state: ChartState, action: ChartAction) => {
+export const reducer: Reducer<ChartState> = (state: ChartState, action: ChartActions) => {
     switch (action.type) {
 
         case 'REQUEST_CHART':
@@ -73,8 +74,15 @@ export const reducer: Reducer<ChartState> = (state: ChartState, action: ChartAct
             };
 
         case 'TOGGLE_FULL_SCREEN':
+            console.log("TOGGLE_FULL_SCREEN");
+            console.log("state");
+            console.log(state);
+            console.log("action");
+            console.log(action);
+
             return {
-                chart_isFullScreen: action.chart_isFullScreen === true ? false : true
+                chart_id: action.chart_id,
+                chart_isFullScreen: state.chart_isFullScreen === true ? false : true
             };
 
         case 'GET_CHART':
